@@ -39,6 +39,7 @@ const SignIn = (props) => {
   const [remember, setRemember] = useState(false);
   const [signInToken, setSignInToken] = useState("");
   const [errorMet, setErrorMet] = useState(false);
+  const [dispMsg, setDispMsg] = useState("");
   const navigate = useNavigate();
 
   const handleChange = () => {
@@ -65,16 +66,17 @@ const SignIn = (props) => {
       .then((response) => response.text())
       .then((result) => {
         result = JSON.parse(result);
-        console.log(typeof result.statusCode);
+
         if (result.statusCode === "200") {
           setSignInToken(result.token);
+        } else {
+          setDispMsg("Invalid Credentials, Try again!");
         }
       })
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
-    console.log(errorMet);
     if (signInToken !== "" && errorMet === false) {
       navigate("/date", { state: { token: signInToken } });
     }
@@ -96,12 +98,16 @@ const SignIn = (props) => {
             margin="normal"
             required
             fullWidth
+            error={dispMsg.length > 0}
             id="email"
             label="Email Address"
             name="email"
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setDispMsg("");
+            }}
             autoFocus
           />
           <TextField
@@ -109,6 +115,7 @@ const SignIn = (props) => {
             margin="normal"
             required
             fullWidth
+            error={dispMsg.length > 0}
             name="password"
             label="Password"
             type="password"
@@ -132,14 +139,17 @@ const SignIn = (props) => {
             fullWidth
             variant="contained"
             onClick={onClick}
-            color="primary"
+            color="warning"
             className={classes.submit}
           >
             Sign In
           </Button>
           <br />
-          <br />
         </form>
+        <br />
+        <Typography component="p" variant="p">
+          {dispMsg.length > 0 && <div>{dispMsg}</div>}
+        </Typography>
       </div>
     </Container>
   );

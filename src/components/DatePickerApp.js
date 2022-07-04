@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-date-picker";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,9 +31,15 @@ const useStyles = makeStyles((theme) => ({
 const DatePickerApp = (props) => {
   const classes = useStyles();
   const [value, onChange] = useState(new Date());
+  const [valueEnd, onChangeEnd] = useState(new Date());
   const [minDate, setMinDate] = useState();
   const [maxDate, setMaxDate] = useState();
+
+  const [firstClick, setFirstClick] = useState(false);
+  const [firstClickEnd, setFirstClickEnd] = useState(false);
+
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchRange();
@@ -60,14 +66,19 @@ const DatePickerApp = (props) => {
       .then((response) => response.text())
       .then((result) => {
         result = JSON.parse(result);
-        if (result.statusCode === "200") {
-          let tempMin = new Date(0);
-          let tempMax = new Date(0);
-          tempMin.setUTCSeconds(result?.result?.startDate);
-          tempMax.setUTCSeconds(result?.result?.endDate);
+        if (result.status.statusCode === "200") {
+          let tempMin = new Date(parseInt(result?.result?.startDate));
+          let tempMax = new Date(parseInt(result?.result?.endDate));
+          if (
+            parseInt(result?.result?.startDate) >
+            parseInt(result?.result?.endDate)
+          ) {
+            let temp = tempMin;
+            tempMin = tempMax;
+            tempMax = temp;
+          }
           setMinDate(tempMin);
           setMaxDate(tempMax);
-          console.log(minDate, maxDate, tempMin, tempMax);
         }
       })
       .catch((error) => console.log("error", error));
@@ -76,12 +87,42 @@ const DatePickerApp = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <h1>Hello</h1>
-        <DatePicker onChange={onChange} value={value} />
+        <DatePicker
+          minDate={minDate}
+          maxDate={maxDate}
+          onChange={(value) => {
+            onChange(value);
+            setFirstClick(true);
+          }}
+          value={value}
+        />
+        <DatePicker
+          minDate={minDate}
+          maxDate={maxDate}
+          onChange={(value) => {
+            onChangeEnd(value);
+            setFirstClickEnd(true);
+          }}
+          value={valueEnd}
+        />
         <br />
-        <br />
-        <Button fullWidth variant="contained" color="primary">
-          Go to dashboard
+        <Button
+          onClick={() => {
+            navigate("/dashboard", {
+              state: {
+                minDate: minDate,
+                maxDate,
+                maxDate,
+                token: location.state.token,
+              },
+            });
+          }}
+          fullWidth
+          disabled={value > valueEnd}
+          variant="contained"
+          color="warning"
+        >
+          VIEW DASHBOARD
         </Button>
       </div>
     </Container>
