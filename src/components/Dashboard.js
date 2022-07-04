@@ -7,13 +7,15 @@ import "../App.css";
 import PieChartComponent from "./Charts/PieChart";
 import BarChartComponent from "./Charts/BarChart";
 import TableChartComponent from "./Charts/TableChart";
+import HorBar from "./Charts/HorBar";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: "40%",
+    marginTop: "10%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    maxWidth: "500px",
   },
   avatar: {
     margin: 1,
@@ -36,9 +38,10 @@ const Dashboard = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Dashboard
+        <Typography component="h3" variant="h7" style={{ fontWeight: "bold" }}>
+          DASHBOARD
         </Typography>
+        {/* <HorBar /> */}
         <PieChartComponent />
         <BarChartComponent />
         <TableChartComponent />

@@ -10,7 +10,7 @@ import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: "30%",
+    marginTop: "10%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -84,27 +84,39 @@ const DatePickerApp = (props) => {
       .catch((error) => console.log("error", error));
   };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
-        <DatePicker
-          minDate={minDate}
-          maxDate={maxDate}
-          onChange={(value) => {
-            onChange(value);
-            setFirstClick(true);
-          }}
-          value={value}
-        />
-        <DatePicker
-          minDate={minDate}
-          maxDate={maxDate}
-          onChange={(value) => {
-            onChangeEnd(value);
-            setFirstClickEnd(true);
-          }}
-          value={valueEnd}
-        />
+        <h3>CHOOSE DATES</h3>
+        <div>
+          <div style={{ display: "flex" }}>
+            <p>FROM </p>&nbsp;&nbsp;&nbsp;
+            <DatePicker
+              minDate={minDate}
+              maxDate={maxDate}
+              onChange={(value) => {
+                onChange(value);
+                setFirstClick(true);
+              }}
+              value={value}
+            />
+          </div>
+          <br />
+          <br />
+          <div style={{ display: "flex" }}>
+            &nbsp;&nbsp;&nbsp;<p>TILL </p>&nbsp;&nbsp;&nbsp;
+            <DatePicker
+              minDate={minDate}
+              maxDate={maxDate}
+              onChange={(value) => {
+                onChangeEnd(value);
+                setFirstClickEnd(true);
+              }}
+              value={valueEnd}
+            />
+          </div>
+        </div>
+        <br />
         <br />
         <Button
           onClick={() => {

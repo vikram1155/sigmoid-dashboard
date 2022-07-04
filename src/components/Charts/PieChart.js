@@ -75,22 +75,23 @@ const PieChartComponent = (props) => {
   };
 
   return (
-    <PieChart
-      data={pieData}
-      style={{
-        height: window.innerHeight - 0.5 * window.innerHeight,
-        margin: "50px",
-      }}
-      radius={PieChart.defaultProps.radius - 7}
-      segmentsShift={(index) => (index === 0 ? 0.5 : 0.5)}
-      label={({ dataEntry }) => dataEntry.value}
-      labelStyle={(index) => ({
-        fill: "#020202",
-        fontSize: "5px",
-        fontFamily: "sans-serif",
-      })}
-      labelPosition={112}
-    />
+    <div className="piechart">
+      <br />
+      <h3>PIE CHART</h3>
+      <PieChart
+        data={pieData}
+        style={{}}
+        radius={PieChart.defaultProps.radius-20}
+        segmentsShift={(index) => (index === 0 ? 2 : 2.5)}
+        label={({ dataEntry }) => dataEntry.value}
+        labelStyle={(index) => ({
+          fill: "#020202",
+          fontSize: "3px",
+          fontFamily: "sans-serif",
+        })}
+        labelPosition={110}
+      />
+    </div>
   );
 };
 

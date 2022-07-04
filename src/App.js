@@ -11,6 +11,7 @@ class Stack extends Component {
   render() {
     return (
       <BrowserRouter>
+        <h3 style={{ textAlign: "center" }}>DATA ANALYTICS DASHBOARD</h3>
         <Routes>
           <Route exact={true} path="/" element={<Login />} />
           <Route path="/date" element={<DatePickerApp />} />

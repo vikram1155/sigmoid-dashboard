@@ -9,17 +9,17 @@ const data = [
   { text: "Woman", value: 300 },
 ];
 
-const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+const margin = { top: 40, right: 40, bottom: 300, left: 100 };
 
 const TableChartComponent = (props) => {
   const [barData, setBarData] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    fetchPie();
+    fetchBar();
   }, []);
 
-  const fetchPie = () => {
+  const fetchBar = () => {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", location.state.token);
     myHeaders.append("Content-Type", "application/json");
@@ -57,11 +57,12 @@ const TableChartComponent = (props) => {
   };
 
   return (
-    <div>
+    <div className="barchart">
+      <h2>Bar chart</h2>
       <BarChart
         // ylabel="Quantity"
         colorByLabel={true}
-        height={500}
+        height={800}
         width={window.innerWidth - 0.1 * window.innerWidth}
         margin={margin}
         data={barData}

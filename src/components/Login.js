@@ -14,7 +14,7 @@ import "../App.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: "40%",
+    marginTop: "30%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -47,6 +47,9 @@ const SignIn = (props) => {
   };
 
   const onClick = async () => {
+    if (!email || !password) {
+      setDispMsg("Enter credentials!");
+    }
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -89,9 +92,10 @@ const SignIn = (props) => {
         <Avatar className={classes.avatar}>
           <PersonIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h3" variant="h7" style={{ fontWeight: "bold" }}>
+          ADMIN SIGN IN
         </Typography>
+        <br />
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -135,6 +139,8 @@ const SignIn = (props) => {
             }
             label="Remember me"
           />
+          <br />
+          <br />
           <Button
             fullWidth
             variant="contained"
@@ -148,7 +154,13 @@ const SignIn = (props) => {
         </form>
         <br />
         <Typography component="p" variant="p">
-          {dispMsg.length > 0 && <div>{dispMsg}</div>}
+          {dispMsg.length > 0 && (
+            <div
+              style={{ color: "red", border: "1px solid red", padding: "5px" }}
+            >
+              {dispMsg}
+            </div>
+          )}
         </Typography>
       </div>
     </Container>

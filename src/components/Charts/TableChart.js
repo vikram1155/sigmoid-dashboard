@@ -46,7 +46,12 @@ const PieChartComponent = (props) => {
 
   return (
     <>
-      <table style={{ width: "200%" }}>
+    <br/>
+    <br/>
+    <h2>Table - view</h2>
+    <br/>
+    <br/>
+      <table style={{ width: "100%" }}>
         <thead>
           <tr>
             <th>Impressions Offered</th>
@@ -62,6 +67,8 @@ const PieChartComponent = (props) => {
           </tbody>
         ))}
       </table>
+      <br/>
+      <br/>
     </>
   );
 };

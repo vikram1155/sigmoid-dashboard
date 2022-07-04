@@ -7,6 +7,29 @@
     pointer-events: none;
 }
 
+.piechart {
+    text-align: center;
+    min-width: 300px;
+}
+
+@media(min-width:500px) {
+    .piechart {
+        min-width: 500px;
+    }
+}
+
+.piechart svg path {
+    cursor: pointer;
+}
+
+.tick text {
+    transform: rotate(-70deg);
+}
+
+.barchart .bar {
+    width: 10px;
+}
+
 rect {
     fill: #63C5DA !important;
 }
@@ -14,14 +37,17 @@ rect {
 table,
 th,
 td {
-    border: 1px solid black;
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+
+/* @media (prefers-reduced-motion: no-preference) {
     .App-logo {
         animation: App-logo-spin infinite 20s linear;
     }
-}
+} */
 
 .App-header {
     background-color: #fff;
