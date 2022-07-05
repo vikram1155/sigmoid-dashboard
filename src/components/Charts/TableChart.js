@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "../../App.css";
 import Table from "./Table";
 
-const PieChartComponent = (props) => {
+const TableChartComponent = (props) => {
   const [tableData, setTableData] = useState([]);
   const location = useLocation();
 
@@ -73,4 +73,4 @@ const PieChartComponent = (props) => {
   );
 };
 
-export default PieChartComponent;
+export default TableChartComponent;

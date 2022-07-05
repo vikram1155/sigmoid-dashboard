@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
+import { validate } from "react-email-validator";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
@@ -40,7 +41,9 @@ const SignIn = (props) => {
   const [signInToken, setSignInToken] = useState("");
   const [errorMet, setErrorMet] = useState(false);
   const [dispMsg, setDispMsg] = useState("");
+  const [dispMsg1, setDispMsg1] = useState("");
   const navigate = useNavigate();
+  const [emailValid, setEmailValid] = useState("");
 
   const handleChange = () => {
     setRemember(!remember);
@@ -48,7 +51,7 @@ const SignIn = (props) => {
 
   const onClick = async () => {
     if (!email || !password) {
-      setDispMsg("Enter credentials!");
+      setDispMsg1("ENTER CREDENTIALS!");
     }
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -73,7 +76,7 @@ const SignIn = (props) => {
         if (result.statusCode === "200") {
           setSignInToken(result.token);
         } else {
-          setDispMsg("Invalid Credentials, Try again!");
+          setDispMsg("INVALID CREDENTIALS!");
         }
       })
       .catch((error) => console.log("error", error));
@@ -108,12 +111,19 @@ const SignIn = (props) => {
             name="email"
             autoComplete="email"
             value={email}
+            onMouseLeave={() =>
+              validate(email)
+                ? setEmailValid("")
+                : setEmailValid("Enter valid email")
+            }
             onChange={(e) => {
               setEmail(e.target.value);
               setDispMsg("");
+              setDispMsg1("");
             }}
             autoFocus
           />
+          <div style={{ color: "red" }}>{emailValid}</div>
           <TextField
             variant="outlined"
             margin="normal"
@@ -159,9 +169,16 @@ const SignIn = (props) => {
               style={{ color: "red", border: "1px solid red", padding: "5px" }}
             >
               {dispMsg}
-              {!email.includes(".") || !email.includes("@") && (
-                <p>Enter correct Email</p>
-              )}
+              {!email.includes(".") ||
+                (!email.includes("@") && <p>Enter correct Email</p>)}
+            </div>
+          )}
+          <br />
+          {dispMsg1.length > 0 && (
+            <div
+              style={{ color: "red", border: "1px solid red", padding: "5px" }}
+            >
+              {dispMsg1}
             </div>
           )}
         </Typography>

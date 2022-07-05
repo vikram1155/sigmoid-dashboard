@@ -11,7 +11,7 @@ const data = [
 
 const margin = { top: 40, right: 40, bottom: 200, left: 100 };
 
-const TableChartComponent = (props) => {
+const BarChartComponent = (props) => {
   const [barData, setBarData] = useState([]);
   const location = useLocation();
 
@@ -71,4 +71,4 @@ const TableChartComponent = (props) => {
   );
 };
 
-export default TableChartComponent;
+export default BarChartComponent;

@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DatePickerApp = (props) => {
+  // console.log("props", props);
   const classes = useStyles();
   const [value, onChange] = useState(new Date());
   const [valueEnd, onChangeEnd] = useState(new Date());

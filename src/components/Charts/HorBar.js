@@ -4,6 +4,12 @@ import Chart from "chart.js/auto";
 import { useLocation } from "react-router-dom";
 import "../../App.css";
 import { useEffect, useState } from "react";
+import "../../App.css";
+// import Bar from "./Bar";
+// import BarChart from "react-bar-chart";
+
+
+const margin = { top: 40, right: 40, bottom: 200, left: 100 };
 
 const state = {
   labels: ["January", "February", "March", "April", "May"],
@@ -23,10 +29,10 @@ const HorBar = (props) => {
   // const location = useLocation();
 
   // useEffect(() => {
-  //   fetchPie();
+  //   fetchBar();
   // }, []);
 
-  // const fetchPie = () => {
+  // const fetchBar = () => {
   //   var myHeaders = new Headers();
   //   myHeaders.append("x-auth-token", location.state.token);
   //   myHeaders.append("Content-Type", "application/json");
