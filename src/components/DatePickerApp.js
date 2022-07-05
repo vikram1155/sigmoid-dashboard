@@ -130,7 +130,7 @@ const DatePickerApp = (props) => {
               },
             });
           }}
-          fullWidth
+          style={{ width: "300px" }}
           disabled={value > valueEnd}
           variant="contained"
           color="warning"
