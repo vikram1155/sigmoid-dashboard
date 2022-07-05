@@ -3,6 +3,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import { useLocation } from "react-router-dom";
 import "../../App.css";
 import Pie from "./Pie";
+import { Pie as Pie1 } from "react-chartjs-2";
 
 const defaultLabelStyle = {
   fontSize: "4px",
@@ -67,21 +68,40 @@ const PieChartComponent = (props) => {
             item.value = parseFloat(item.CM001_percent);
             item.color = colors[Math.floor(Math.random() * colors.length)];
           });
-
+          console.log(pieData);
           setPieData(tempPieData);
         }
       })
       .catch((error) => console.log("error", error));
+  };
+  const dataPie = {
+    labels: pieData.map((p) => p.advertiserId),
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: pieData.map((p) => p.CM001_percent),
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+          "#63C5DA",
+          "#48AAAD",
+          "#82EEFD",
+          "#0492C2",
+        ],
+        hoverOffset: 5,
+      },
+    ],
   };
 
   return (
     <div className="piechart">
       <br />
       <h3>PIE CHART</h3>
-      <PieChart
+      {/* <PieChart
         data={pieData}
         style={{}}
-        radius={PieChart.defaultProps.radius-20}
+        radius={PieChart.defaultProps.radius - 20}
         segmentsShift={(index) => (index === 0 ? 2 : 2.5)}
         label={({ dataEntry }) => dataEntry.value}
         labelStyle={(index) => ({
@@ -90,6 +110,20 @@ const PieChartComponent = (props) => {
           fontFamily: "sans-serif",
         })}
         labelPosition={110}
+      /> */}
+      <Pie1
+        data={dataPie}
+        options={{
+          title: {
+            display: true,
+            text: "Average Rainfall per month",
+            fontSize: 15,
+          },
+          legend: {
+            display: true,
+            position: "right",
+          },
+        }}
       />
     </div>
   );

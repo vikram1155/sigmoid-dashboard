@@ -22,6 +22,10 @@
     width: 1250px !important;
 }
 
+.piechart canvas {
+    width: 750px !important;
+}
+
 .piechart svg path {
     cursor: pointer;
 }
