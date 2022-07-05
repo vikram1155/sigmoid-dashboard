@@ -58,9 +58,9 @@ const Dashboard = (props) => {
         >
           CHANGE DATES
         </Button>
-        {/* <HorBar /> */}
+        <HorBar />
         <PieChartComponent />
-        <BarChartComponent />
+        {/* <BarChartComponent /> */}
         <TableChartComponent />
       </div>
     </Container>

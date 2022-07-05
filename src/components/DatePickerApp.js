@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DatePickerApp = (props) => {
-  // console.log("props", props);
   const classes = useStyles();
   const [value, onChange] = useState(new Date());
   const [valueEnd, onChangeEnd] = useState(new Date());
@@ -84,61 +83,70 @@ const DatePickerApp = (props) => {
       })
       .catch((error) => console.log("error", error));
   };
+  console.log("l", location.state.token);
   return (
-    <Container component="main">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <h3>CHOOSE DATES</h3>
-        <div>
-          <div style={{ display: "flex" }}>
-            <p>FROM </p>&nbsp;&nbsp;&nbsp;
-            <DatePicker
-              minDate={minDate}
-              maxDate={maxDate}
-              onChange={(value) => {
-                onChange(value);
-                setFirstClick(true);
+    <>
+      {location.state.token ? (
+        <Container component="main">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <h3>CHOOSE DATES</h3>
+            <div>
+              <div style={{ display: "flex" }}>
+                <p>FROM </p>&nbsp;&nbsp;&nbsp;
+                <DatePicker
+                  minDate={minDate}
+                  maxDate={maxDate}
+                  onChange={(value) => {
+                    onChange(value);
+                    setFirstClick(true);
+                  }}
+                  value={value}
+                />
+              </div>
+              <br />
+              <br />
+              <div style={{ display: "flex" }}>
+                &nbsp;&nbsp;&nbsp;<p>TILL </p>&nbsp;&nbsp;&nbsp;
+                <DatePicker
+                  minDate={minDate}
+                  maxDate={maxDate}
+                  onChange={(value) => {
+                    onChangeEnd(value);
+                    setFirstClickEnd(true);
+                  }}
+                  value={valueEnd}
+                />
+              </div>
+            </div>
+            <br />
+            <br />
+            <Button
+              onClick={() => {
+                navigate("/dashboard", {
+                  state: {
+                    minDate: minDate,
+                    maxDate,
+                    maxDate,
+                    token: location.state.token,
+                  },
+                });
               }}
-              value={value}
-            />
+              style={{ width: "300px" }}
+              disabled={value > valueEnd}
+              variant="contained"
+              color="warning"
+            >
+              VIEW DASHBOARD
+            </Button>
           </div>
-          <br />
-          <br />
-          <div style={{ display: "flex" }}>
-            &nbsp;&nbsp;&nbsp;<p>TILL </p>&nbsp;&nbsp;&nbsp;
-            <DatePicker
-              minDate={minDate}
-              maxDate={maxDate}
-              onChange={(value) => {
-                onChangeEnd(value);
-                setFirstClickEnd(true);
-              }}
-              value={valueEnd}
-            />
-          </div>
-        </div>
-        <br />
-        <br />
-        <Button
-          onClick={() => {
-            navigate("/dashboard", {
-              state: {
-                minDate: minDate,
-                maxDate,
-                maxDate,
-                token: location.state.token,
-              },
-            });
-          }}
-          style={{ width: "300px" }}
-          disabled={value > valueEnd}
-          variant="contained"
-          color="warning"
-        >
-          VIEW DASHBOARD
-        </Button>
-      </div>
-    </Container>
+        </Container>
+      ) : (
+        <>
+          <p>Nothing here</p>
+        </>
+      )}
+    </>
   );
 };
 

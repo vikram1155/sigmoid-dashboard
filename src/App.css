@@ -18,6 +18,10 @@
     }
 }
 
+.barchart canvas {
+    width: 1250px !important;
+}
+
 .piechart svg path {
     cursor: pointer;
 }

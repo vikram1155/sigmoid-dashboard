@@ -37,7 +37,7 @@ const TableChartComponent = (props) => {
         result = JSON.parse(result);
         if (result?.status?.statusCode === "200") {
           let tempPieData = result?.result?.data;
-          console.log(tempPieData);
+          // console.log(tempPieData);
           setTableData(tempPieData);
         }
       })

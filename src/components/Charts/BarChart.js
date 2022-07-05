@@ -45,7 +45,7 @@ const BarChartComponent = (props) => {
         result = JSON.parse(result);
         if (result?.status?.statusCode === "200") {
           let tempResult = result?.result?.data;
-          console.log(tempResult);
+          // console.log(tempResult);
           setBarData(tempResult);
           tempResult.forEach((item) => {
             item.text = item.appSiteId;
