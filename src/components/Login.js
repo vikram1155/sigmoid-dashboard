@@ -159,6 +159,9 @@ const SignIn = (props) => {
               style={{ color: "red", border: "1px solid red", padding: "5px" }}
             >
               {dispMsg}
+              {!email.includes(".") || !email.includes("@") && (
+                <p>Enter correct Email</p>
+              )}
             </div>
           )}
         </Typography>

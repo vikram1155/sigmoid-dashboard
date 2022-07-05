@@ -22,7 +22,7 @@
     cursor: pointer;
 }
 
-.tick text {
+.x .tick text {
     transform: rotate(-70deg);
 }
 

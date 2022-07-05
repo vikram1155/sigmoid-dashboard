@@ -2,12 +2,13 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../App.css";
 import PieChartComponent from "./Charts/PieChart";
 import BarChartComponent from "./Charts/BarChart";
 import TableChartComponent from "./Charts/TableChart";
 import HorBar from "./Charts/HorBar";
+import { Button } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
   const location = useLocation();
   const classes = useStyles();
+  const navigate = useNavigate();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -41,6 +43,21 @@ const Dashboard = (props) => {
         <Typography component="h3" variant="h7" style={{ fontWeight: "bold" }}>
           DASHBOARD
         </Typography>
+        <br />
+        <Button
+          onClick={() => {
+            navigate("/date", {
+              state: {
+                token: location.state.token,
+              },
+            });
+          }}
+          fullWidth
+          variant="contained"
+          color="warning"
+        >
+          CHANGE DATES
+        </Button>
         {/* <HorBar /> */}
         <PieChartComponent />
         <BarChartComponent />

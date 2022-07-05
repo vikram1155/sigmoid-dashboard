@@ -9,7 +9,7 @@ const data = [
   { text: "Woman", value: 300 },
 ];
 
-const margin = { top: 40, right: 40, bottom: 300, left: 100 };
+const margin = { top: 40, right: 40, bottom: 200, left: 100 };
 
 const TableChartComponent = (props) => {
   const [barData, setBarData] = useState([]);
@@ -58,11 +58,11 @@ const TableChartComponent = (props) => {
 
   return (
     <div className="barchart">
-      <h2>Bar chart</h2>
+      <h2 style={{ textAlign: "center" }}>Bar chart</h2>
       <BarChart
         // ylabel="Quantity"
         colorByLabel={true}
-        height={800}
+        height={1000}
         width={window.innerWidth - 0.1 * window.innerWidth}
         margin={margin}
         data={barData}
