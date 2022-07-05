@@ -111,7 +111,7 @@ const SignIn = (props) => {
             name="email"
             autoComplete="email"
             value={email}
-            onMouseLeave={() =>
+            onBlur={() =>
               validate(email)
                 ? setEmailValid("")
                 : setEmailValid("Enter valid email")
